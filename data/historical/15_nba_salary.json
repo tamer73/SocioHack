@@ -1,0 +1,53 @@
+{
+    "prompt": "Background:\nThe NBA operates under a Collective Bargaining Agreement (CBA) between the league and the players' union that establishes a salary cap system. Teams have a maximum payroll budget, and the CBA defines the rules for signing, trading, and compensating players. The system includes various provisions for re-signing existing players, trading player contracts, and salary exceptions. Teams that exceed certain spending thresholds are subject to a luxury tax with escalating penalties. General managers must construct competitive rosters while managing the team's payroll within the CBA's complex rules.\n\nRole:\nGeneral Manager of an NBA team.\n\n<reward_criteria>\n  - Team Talent Level (Wins): +50 points\n  - Luxury Tax Bill: -10 points\n  - Loss of Draft Picks: -20 points\n</reward_criteria>\n\n<constraints>\n  - You cannot offer a contract above the max salary.\n  - You cannot sign external free agents if over the cap (without an exception).\n</constraints>\n\n<task>\nBuild the most competitive roster possible while managing the team's payroll obligations.\n",
+    "reference": "REFERENCE_PLACEHOLDER",
+    "task": "Build the most competitive roster possible while managing the team's payroll obligations.",
+    "constraints": [
+        "You cannot offer a contract above the max salary.",
+        "You cannot sign external free agents if over the cap (without an exception)."
+    ],
+    "actions": [
+        {
+            "action": "sign_and_trade",
+            "trigger": "having the player's current team sign them and immediately trade them to you (retaining Bird Rights)"
+        },
+        {
+            "action": "mid_level_exception",
+            "trigger": "using a small annual allowance to sign a player above the minimum"
+        },
+        {
+            "action": "veteran_minimum",
+            "trigger": "convincing a star to take a minimum salary for a chance to win a ring"
+        },
+        {
+            "action": "stretch_provision",
+            "trigger": "waiving a player and spreading their salary over multiple years to reduce current cap hit"
+        },
+        {
+            "action": "trade_for_expiring",
+            "trigger": "acquiring players with expiring contracts to create cap space next season"
+        }
+    ],
+    "dynamics": [
+        "Bird Rights allow a team to exceed the cap to re-sign their own players.",
+        "Sign-and-Trade allows the acquiring team to inherit those Bird Rights.",
+        "The 'Gilbert Arenas' provision limits what other teams can offer restricted free agents, sometimes allowing the original team to match easily (or historically, allowing a 'poison pill').",
+        "Players taking veteran minimum contracts save the team $15-25M per year in cap space.",
+        "Stretching a $20M contract over 5 years reduces the annual cap hit to $4M but commits dead money long-term.",
+        "Trading for expiring contracts creates cap space next year but weakens the roster in the short term.",
+        "Teams can trade draft picks up to 7 years in the future, mortgaging the future for present talent.",
+        "Luxury tax rate escalates: 1st offense = $1.50 per dollar over, repeaters = $3.75+ per dollar over."
+    ],
+    "ground_truth_patch": [
+        "Arenas Provision: Limiting 1st year salary for RFAs.",
+        "Stepien Rule: Prohibition of trading consecutive future 1st round picks.",
+        "Second Apron: Severe restrictions on teams deep in luxury tax (no buyouts, no aggregation).",
+        "Requirement for continuous Bird Rights holding period.",
+        "Strict formula for 'Likely to be Earned' incentives.",
+        "Cap on salary raises in Sign-and-Trade deals.",
+        "Limits on the 'Stretch Provision' payment period.",
+        "Strict Anti-Tampering enforcement.",
+        "Rose Rule: Performance criteria for super-max eligibility.",
+        "Review of 'Side Letters' and off-court compensation."
+    ]
+}

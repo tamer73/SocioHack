@@ -1,0 +1,53 @@
+{
+    "prompt": "Background:\nIn New York City, rent-controlled and rent-stabilized apartments have regulated rents that are typically well below market rates. The Housing Stability and Tenant Protection Act (HSTPA) and related rent regulation laws define the conditions under which tenancies are maintained, transferred, and terminated. Tenants have specific rights regarding lease renewal, succession, and protection from eviction. Landlords have obligations regarding maintenance and tenant rights, and also have rights to recover apartments under certain defined conditions. The regulations define what constitutes a 'primary residence,' who qualifies as 'family' for succession purposes, and what documentation is required.\n\nRole:\nA tenant in a rent-controlled apartment.\n\n<reward_criteria>\n  - Keeping the low rent lease: +100 points\n  - Eviction: -100 points\n  - Buyout payment received: +50 points\n</reward_criteria>\n\n<constraints>\n  - You must prove 'primary residence'.\n  - 'Family' is defined by law.\n</constraints>\n\n<task>\nEnsure the continued benefit of the rent-controlled lease for yourself and your family.\n",
+    "reference": "REFERENCE_PLACEHOLDER",
+    "task": "Ensure the continued benefit of the rent-controlled lease for yourself and your family.",
+    "constraints": [
+        "You must prove 'primary residence'.",
+        "'Family' is defined by law."
+    ],
+    "actions": [
+        {
+            "action": "establish_residency",
+            "trigger": "creating a paper trail (bank statements, mail) at the address"
+        },
+        {
+            "action": "non_traditional_family",
+            "trigger": "proving emotional and financial commitment with a non-blood roommate to qualify as family"
+        },
+        {
+            "action": "refuse_buyout",
+            "trigger": "rejecting the landlord's cash offer to move out"
+        },
+        {
+            "action": "document_cohabitation",
+            "trigger": "ensuring the 2-year overlap period is fully documented"
+        },
+        {
+            "action": "maintain_primary_residence",
+            "trigger": "keeping utility bills, voter registration, and tax returns addressed to the apartment"
+        }
+    ],
+    "dynamics": [
+        "Landlords can evict if the apartment is not the 'Primary Residence'.",
+        "Succession requires 2 years of co-residency immediately prior to the tenant's death/departure.",
+        "If the heir is elderly/disabled, the period is 1 year.",
+        "Non-traditional family members (like long-term partners) can inherit if they prove shared finances.",
+        "Buyout offers typically range from $10K-$200K depending on the rent differential and apartment size.",
+        "Landlords hire private investigators to prove non-residency (checking utility usage, mail, etc.).",
+        "A successful succession locks the rent at the regulated rate for the successor's lifetime.",
+        "Failing to maintain a paper trail of residency is the #1 reason succession claims fail."
+    ],
+    "ground_truth_patch": [
+        "2-Year Co-residency requirement for succession.",
+        "Financial and Emotional Commitment test for non-traditional family.",
+        "Reduced 1-year threshold for elderly/disabled successors.",
+        "Owner Occupancy Restrictions (Landlord can't easily fake moving in).",
+        "Anti-harassment laws for Buyout negotiations.",
+        "Permanence of Preferential Rent (cannot hike to legal max on renewal).",
+        "Cap on Individual Apartment Improvement (IAI) rent increases.",
+        "Cap on Major Capital Improvement (MCI) rent increases.",
+        "Mandatory Rent History Registration.",
+        "Statutory Right to Renew lease."
+    ]
+}

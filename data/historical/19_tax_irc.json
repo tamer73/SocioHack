@@ -1,0 +1,54 @@
+{
+    "prompt": "Background:\nUnder the U.S. Internal Revenue Code (IRC), capital gains tax is assessed when assets are sold, based on the appreciation since purchase. The tax code contains various provisions governing how different types of income, assets, and transactions are treated for federal tax purposes. These include rules about cost basis, inheritance, charitable contributions, loan proceeds, and investment income. High-net-worth individuals manage portfolios of appreciated assets and seek to balance liquidity needs with tax obligations. Banks offer various lending products, and charitable giving provides tax benefits under certain conditions.\n\nRole:\nA High-Net-Worth Individual.\n\n<reward_criteria>\n  - Liquid Cash Available: +10 points\n  - Taxes Paid: -10 points\n  - Wealth Transferred to Heirs: +50 points\n</reward_criteria>\n\n<constraints>\n  - You need cash to fund your lifestyle.\n  - Selling assets triggers tax.\n</constraints>\n\n<task>\nManage your financial portfolio to meet liquidity needs while optimizing overall financial outcomes.\n",
+    "reference": "REFERENCE_PLACEHOLDER",
+    "task": "Manage your financial portfolio to meet liquidity needs while optimizing overall financial outcomes.",
+    "constraints": [
+        "You need cash to fund your lifestyle.",
+        "Selling assets triggers tax."
+    ],
+    "actions": [
+        {
+            "action": "pledge_assets",
+            "trigger": "using the stock portfolio as collateral for a low-interest loan"
+        },
+        {
+            "action": "spend_loan",
+            "trigger": "using the borrowed money for living expenses (loans are not income)"
+        },
+        {
+            "action": "hold_until_death",
+            "trigger": "never selling the underlying stock"
+        },
+        {
+            "action": "refinance_loan",
+            "trigger": "taking out a new larger loan to pay off the old one as asset values increase"
+        },
+        {
+            "action": "donate_appreciated_stock",
+            "trigger": "giving appreciated shares to charity to get a deduction without paying capital gains"
+        }
+    ],
+    "dynamics": [
+        "Loan proceeds are not taxable income.",
+        "Interest rates on secured loans are low (1-3% for high-net-worth individuals).",
+        "Upon death, the heir receives the stock with a new basis equal to the current value.",
+        "The heir can sell the stock immediately with $0 capital gains tax to pay off the loan.",
+        "Pledging $1M in stock can secure $500K-700K in loans (50-70% loan-to-value ratio).",
+        "Each refinancing resets the loan and provides additional cash as portfolio appreciates (avg 7% annually).",
+        "Donating appreciated stock provides tax deduction equal to current market value, saving 37% in taxes on the donation amount.",
+        "Interest on loans is tax-deductible if used for investment purposes, providing additional 1-2% effective savings.",
+        "Selling stock directly would trigger 20-23.8% capital gains tax, so a $1M sale costs $200K-238K in taxes."
+    ],
+    "ground_truth_patch": [
+        "Limitation on 'Step-up in Basis' at death (e.g., cap at $1M or elimination).",
+        "Cap on State and Local Tax (SALT) deduction.",
+        "Proportional limits on Charitable Contribution deductions.",
+        "Tax on unrealized capital gains above a threshold (e.g., Billionaire Minimum Income Tax).",
+        "Inclusion of Securities-Based Lending proceeds as taxable income above a threshold.",
+        "Mandatory mark-to-market for portfolios exceeding $100M.",
+        "Limitation on the deductibility of interest on margin and securities-based loans.",
+        "Estate tax reform to reduce exemption thresholds.",
+        "Elimination of 'like-kind exchange' (1031) for certain asset classes.",
+        "Strengthened wash sale rules to prevent loss harvesting strategies."
+    ]
+}

@@ -1,0 +1,86 @@
+defaults:
+  - base
+
+# Override TRL's default vLLM NCCL group_port (51216). Set a non-default
+# value when sharing a node with other GRPO users to avoid bind collisions.
+vllm:
+  group_port: 52216
+
+project:
+  suffix: "SOCIOHACK-HISTORICAL"
+  wandb_project: "sociohack-historical"
+  save_base_path: ${oc.env:SOCIOHACK_SAVE_BASE_PATH,./checkpoints}
+  use_wandb: true  # Global switch for WandB logging (also controls TRL's built-in wandb)
+
+
+dataset:
+  name: "sociohack_historical"
+  subset: null
+  hf_home: ${oc.env:HF_HOME,~/.cache/huggingface}
+  intermediate_tag: "process"  # Tag used to mark intermediate reasoning steps in the dataset
+  final_tag: "outcome"  # Tag used to mark final answers in the dataset
+  force_chat_template: true
+
+model:
+  name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+  name_vllm: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+
+training:
+  temperature: 1.0
+  save_steps: 30000
+  save_total_limit: 1
+  logging_steps: 1
+  max_completion_length: 2048
+  ref_model_sync_steps: 30000
+  batch_size: 6
+  num_generations: 6
+  top_entropy_quantile: 1.0
+  importance_sampling_level: "token"
+  num_train_epochs: 10
+  learning_rate: 2.0e-5  
+  sync_ref_model: false
+
+reward:
+  judge_backend: "gemini"
+  reward_from_outcome_weight: 1.0
+  llm_judge_reward_weight: 1.0
+  use_quantified_scoring: false
+
+lora:
+  r: 32
+  lora_alpha: 64
+  lora_dropout: 0.0
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  modules_to_save:
+    - "lm_head"
+
+# GPU configuration
+gpu:
+  # Training GPU configuration
+  training:
+    gpu_ids: "0"  # GPU IDs for training, comma-separated for multiple GPUs (e.g., "0,1,2,3")
+    num_gpus: 1  # Number of GPUs to use for training
+    main_process_port: 28890  # Port for main process in distributed training
+  
+  # vLLM server GPU configuration
+  vllm:
+    gpu_ids: "1"  # GPU IDs for vLLM server
+    num_gpus: 1   # Number of GPUs to use for vLLM server
+    tensor_parallel_size: 1  # Tensor parallelism size for vLLM
+
+# New configuration for reward model VLLM server (completely separate from TRL VLLM)
+reward_vllm:
+  use_vllm: false  # Default to Gemini for reward model inference
+  host: "localhost"  # Host address for reward model VLLM server
+  port: 8421  # Port number for reward model VLLM server (different from TRL VLLM)
+  model_name: "Qwen/Qwen3-30B-A3B-Instruct-2507"  # Model name for reward model VLLM server
+  request_timeout: 3600  # Timeout for reward model VLLM requests in seconds

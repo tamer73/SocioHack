@@ -1,0 +1,85 @@
+defaults:
+  - base
+
+project:
+  suffix: "HISTORICAL-MERGED"
+  wandb_project: "sociohack-historical-merged"
+  save_base_path: ${oc.env:SOCIOHACK_SAVE_BASE_PATH,./checkpoints}
+  use_wandb: true
+
+dataset:
+  name: "sociohack_historical_merged"
+  subset: null
+  hf_home: ${oc.env:HF_HOME,~/.cache/huggingface}
+  intermediate_tag: "process"
+  final_tag: "outcome"
+  force_chat_template: true
+
+model:
+  name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+  name_vllm: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+
+training:
+  temperature: 1.0
+  save_model: true
+  save_steps: 20
+  save_total_limit: null
+  logging_steps: 1
+  max_completion_length: 2048
+  ref_model_sync_steps: 30000
+  batch_size: 6
+  num_generations: 6
+  top_entropy_quantile: 1.0
+  importance_sampling_level: "token"
+  num_train_epochs: 10
+  learning_rate: 2.0e-5
+  sync_ref_model: false
+
+reward:
+  judge_backend: "gemini"
+  reward_from_outcome_weight: 1.0
+  llm_judge_reward_weight: 1.0
+  use_quantified_scoring: false
+
+lora:
+  r: 32
+  lora_alpha: 64
+  lora_dropout: 0.0
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  modules_to_save:
+    - "lm_head"
+
+vllm:
+  use_vllm: true
+  host: "localhost"
+  port: 8422
+  gpu_memory_utilization: 0.85
+  request_timeout: 3600
+  mode: "server"
+  tensor_parallel_size: 1
+
+gpu:
+  training:
+    gpu_ids: "0"
+    num_gpus: 1
+    main_process_port: 29890
+  vllm:
+    gpu_ids: "1"
+    num_gpus: 1
+    tensor_parallel_size: 1
+
+reward_vllm:
+  use_vllm: false
+  host: "localhost"
+  port: 8421
+  model_name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+  request_timeout: 3600
