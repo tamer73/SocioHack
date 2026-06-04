@@ -1,6 +1,7 @@
 # SocioHack
 
-Code and data for **SocioHack**, a benchmark of 72 societal environments for studying whether RL policies rediscover regulatory loopholes. The repository includes raw environments, GRPO training code, and Gemini-based evaluation scripts.
+Code and data for the paper [Large Language Models Hack Rewards, and Society](https://arxiv.org/abs/2606.04075).
+It contains 72 societal environments for studying whether RL policies rediscover regulatory loopholes by reward hacking. The repository includes raw environments, GRPO training code, and Gemini-based evaluation scripts.
 
 ## Contents
 
