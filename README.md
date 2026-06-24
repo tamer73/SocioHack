@@ -1,3 +1,7 @@
+siehe auch 
+KI findet Schlupflöcher in Gesetzen und Steuern – Society Hacking erklärt https://share.google/Bpjm28I2e3swGsoL7
+
+
 # SocioHack
 
 Code and data for the paper [Large Language Models Hack Rewards, and Society](https://arxiv.org/abs/2606.04075).
